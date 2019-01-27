@@ -21,18 +21,24 @@ public class MessageDigestDemo {
 	//4. Change provider
 
 	@Test
-	public void testCryptoDemo() throws NoSuchAlgorithmException, NoSuchProviderException {
+	public void testCryptoDemo() throws NoSuchAlgorithmException {
 		// Add BouncyCastle to security providers.
 		Security.addProvider(new BouncyCastleProvider());
 
 		//MessageDigest digester = MessageDigest.getInstance("SHA-256");
-		MessageDigest digester = MessageDigest.getInstance("SHA-256", "BC");
+		MessageDigest digester = MessageDigest.getInstance("SHA-256");
 
 		// get a message digest
 		hashText("The quick brown fox jumped over the lazy dog.", digester);
 
-		// new digest looks nothing like old digest
+		//hash it again, deterministic
+		hashText("The quick brown fox jumped over the lazy dog.", digester);
+
+		// psuedorandom, new digest looks nothing like old digest
 		hashText("The quick brown fox jumped ower the lazy dog.", digester);
+
+		// hash is always fixed length.
+		hashText("The quick brown fox jumped ower the lazy dog and a lot more stuff happened after that.", digester);
 
 	}
 
