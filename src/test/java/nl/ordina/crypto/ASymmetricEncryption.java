@@ -42,6 +42,12 @@ public class ASymmetricEncryption {
 
         byte[] text = Files.readAllBytes(Path.of("justright.txt"));
         byte[] encryptedText = cipher.doFinal(text);
+
+        cipher.init(Cipher.DECRYPT_MODE, keyPair.getPublic());
+        byte[] plainText = cipher.doFinal(encryptedText);
+
+        System.out.println("decoded text : " + new String(plainText));
+
     }
 
 }

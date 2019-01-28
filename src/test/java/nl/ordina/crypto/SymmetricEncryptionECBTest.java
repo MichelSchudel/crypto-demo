@@ -12,7 +12,6 @@ import java.security.Key;
 
 public class SymmetricEncryptionECBTest {
 
-    //1. show load provider
     //2. show key generation
     //3. create string of 128 bytes, explaining block size of AES is 128
     //4. Encrypt, show it's 128 bytes
@@ -21,10 +20,6 @@ public class SymmetricEncryptionECBTest {
 
     @Test
     public void testSymmetricEncryption() throws GeneralSecurityException, UnsupportedEncodingException {
-
-        //1.
-        // Add BouncyCastle to security providers.
-        Utils.loadProvider();
 
         // make key
         KeyGenerator generator = KeyGenerator.getInstance("AES");
@@ -36,10 +31,10 @@ public class SymmetricEncryptionECBTest {
 
         // make some input
         byte[] input = "JFokus!!".repeat(16).getBytes("UTF-8");
+        System.out.println("input text : " + new String(input) + "\r\ninput text length: " + input.length);
         System.out.println("input length:" + input.length);
 
         Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
-        System.out.println("input text : " + new String(input) + "\r\ninput text length: " + input.length);
         // encryption pass
 
         cipher.init(Cipher.ENCRYPT_MODE, key);
