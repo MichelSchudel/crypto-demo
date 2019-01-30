@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.Key;
 
-public class SymmetricEncryptionECBTest {
+public class SymmetricEncryptionECBDemo {
 
     //2. show key generation
     //3. create string of 128 bytes, explaining block size of AES is 128
@@ -35,8 +35,6 @@ public class SymmetricEncryptionECBTest {
         System.out.println("input length:" + input.length);
 
         Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
-        // encryption pass
-
         cipher.init(Cipher.ENCRYPT_MODE, key);
         byte[] encryptedOutput = cipher.doFinal(input);
         System.out.println("cipher text: " + new String(Base64.encode(encryptedOutput)) + "\r\ncipher text length: "
@@ -44,7 +42,6 @@ public class SymmetricEncryptionECBTest {
         System.out.println("hexadecimal: " + Utils.byteArrayToHexString(encryptedOutput));
 
         // decryption pass
-
         cipher.init(Cipher.DECRYPT_MODE, key);
         byte[] decryptedOutput = cipher.doFinal(encryptedOutput);
         System.out.println("decoded text : " + new String(decryptedOutput) + "\r\nlength: " + decryptedOutput.length);

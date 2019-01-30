@@ -13,7 +13,7 @@ import org.junit.Test;
 /**
  * A small message digest demo.
  */
-public class MessageDigestDemo {
+public class HashingDemo {
 
 	//1. show hash
 	//2. change one letter
@@ -45,7 +45,8 @@ public class MessageDigestDemo {
 	private void hashText(String s, MessageDigest digester) throws NoSuchAlgorithmException {
 		byte[] input = s.getBytes();
 		byte[] digest = digester.digest(input);
-		System.out.println(Utils.byteArrayToHexString(digest));
+		System.out.println("Input: " + s);
+		System.out.println("Digest: " + Utils.byteArrayToHexString(digest));
 		System.out.println("length of digest:" + digest.length);
 	}
 }

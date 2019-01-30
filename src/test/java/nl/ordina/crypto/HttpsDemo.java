@@ -9,12 +9,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.cert.Certificate;
 
-public class HttpsTest {
+public class HttpsDemo {
 
 
         public static void main(String[] args)
         {
-            new HttpsTest().testIt();
+            new HttpsDemo().testIt();
         }
 
         private void testIt(){

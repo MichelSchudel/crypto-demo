@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class HMACDemo {
 
     @Test
-    public void testHMac() throws NoSuchProviderException, NoSuchAlgorithmException, InvalidKeyException {
+    public void testHMac() throws NoSuchAlgorithmException, InvalidKeyException {
 
         // make key
         KeyGenerator generator = KeyGenerator.getInstance("HMACSha256");

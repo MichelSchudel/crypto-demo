@@ -14,7 +14,7 @@ import nl.ordina.crypto.util.Utils;
 import org.bouncycastle.util.encoders.Base64;
 import org.junit.Test;
 
-public class SymmetricEncryptionCBCTest {
+public class SymmetricEncryptionCBCDemo {
 
 	//2. show key generation
 	//3. create string of 128 bytes, explaining block size of AES is 128
@@ -39,7 +39,6 @@ public class SymmetricEncryptionCBCTest {
 		System.out.println("input length:" + input.length);
 
 		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-
 		SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
 		byte[] random = new byte[16];
 		secureRandom.nextBytes(random);
@@ -53,13 +52,7 @@ public class SymmetricEncryptionCBCTest {
 				+ encryptedOutput.length);
 		System.out.println("hexadecimal: " + Utils.byteArrayToHexString(encryptedOutput));
 
-		// decryption pass
-		//KeyGenerator generator2 = KeyGenerator.getInstance("AES");
-		// specify we want a key length of 192 bits, allowed for AES
-		//generator2.init(192);
-		//Key otherKey = generator2.generateKey();
-
-
+		//decryption pass
 		cipher.init(Cipher.DECRYPT_MODE, key, ivSpec);
 		byte[] decryptedOutput = cipher.doFinal(encryptedOutput);
 		System.out.println("decoded text : " + new String(decryptedOutput) + "\r\nlength: " + decryptedOutput.length);

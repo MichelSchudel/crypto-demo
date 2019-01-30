@@ -12,25 +12,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.*;
 
-public class ASymmetricEncryption {
+public class ASymmetricEncryptionDemo {
 
     @Test
-    public void encryptSomethingWithRsa() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IOException, BadPaddingException, IllegalBlockSizeException, NoSuchProviderException {
-
-        KeyPairGenerator kpGen = KeyPairGenerator.getInstance("RSA");
-        kpGen.initialize(1024);
-        KeyPair keyPair = kpGen.generateKeyPair();
-
-
-        Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.ENCRYPT_MODE, keyPair.getPrivate());
-
-        byte[] text = Files.readAllBytes(Path.of("largefile.txt"));
-        byte[] encryptedText = cipher.doFinal(text);
-    }
-
-    @Test
-    public void encryptSomethingWithRsaShorter() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IOException, BadPaddingException, IllegalBlockSizeException, NoSuchProviderException {
+    public void encryptSomeShortTextWithRsa() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IOException, BadPaddingException, IllegalBlockSizeException, NoSuchProviderException {
 
         KeyPairGenerator kpGen = KeyPairGenerator.getInstance("RSA");
         kpGen.initialize(1024);
@@ -49,5 +34,21 @@ public class ASymmetricEncryption {
         System.out.println("decoded text : " + new String(plainText));
 
     }
+
+    @Test
+    public void encryptTheFellowshipOfTheRingWithRsa() throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IOException, BadPaddingException, IllegalBlockSizeException, NoSuchProviderException {
+
+        KeyPairGenerator kpGen = KeyPairGenerator.getInstance("RSA");
+        kpGen.initialize(1024);
+        KeyPair keyPair = kpGen.generateKeyPair();
+
+
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.ENCRYPT_MODE, keyPair.getPrivate());
+
+        byte[] text = Files.readAllBytes(Path.of("largefile.txt"));
+        byte[] encryptedText = cipher.doFinal(text);
+    }
+
 
 }

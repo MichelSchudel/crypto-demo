@@ -8,7 +8,7 @@ import java.security.*;
 
 import static org.junit.Assert.assertTrue;
 
-public class AsymmetricSigningTest {
+public class SigntatureDemo {
 
     @Test
     public void testAsymmetricSigningHard() throws GeneralSecurityException {
