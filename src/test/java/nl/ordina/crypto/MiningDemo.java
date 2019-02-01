@@ -1,6 +1,7 @@
 package nl.ordina.crypto;
 
 import nl.ordina.crypto.util.Utils;
+import org.apache.commons.codec.binary.Hex;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.junit.Test;
 
@@ -64,17 +65,13 @@ public class MiningDemo {
 		MessageDigest digester = MessageDigest.getInstance("SHA-256");
 
 		while (!(digester.digest(block.toString().getBytes())[0] == 0)) {
+			System.out.println("block" + block + " has hash " + Hex.encodeHexString(digester.digest(block.toString().getBytes())) + ", not good enough!");
 			block.nonce++;
 		}
 
+		System.out.println("block" + block + " has hash " + Hex.encodeHexString(digester.digest(block.toString().getBytes())));
 		System.out.println("block took " + block.nonce + " iterations to seal.");
 
 	}
 
-	private void hashText(String s, MessageDigest digester) throws NoSuchAlgorithmException {
-		byte[] input = s.getBytes();
-		byte[] digest = digester.digest(input);
-		System.out.println(Utils.byteArrayToHexString(digest));
-		System.out.println("length of digest:" + digest.length);
-	}
 }

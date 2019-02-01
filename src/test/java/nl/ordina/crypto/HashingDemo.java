@@ -29,24 +29,30 @@ public class HashingDemo {
 		MessageDigest digester = MessageDigest.getInstance("SHA-256");
 
 		// get a message digest
+		System.out.println("one way only!");
 		hashText("The quick brown fox jumped over the lazy dog.", digester);
 
 		//hash it again, deterministic
+		System.out.println("deterministic");
 		hashText("The quick brown fox jumped over the lazy dog.", digester);
 
+		// hash is always fixed length.
+		System.out.println("fixedlength");
+		hashText("The quick brown fox jumped ower the lazy dog and a lot more stuff happened after that.", digester);
+
 		// psuedorandom, new digest looks nothing like old digest
+		System.out.println("psuedorandom");
 		hashText("The quick brown fox jumped ower the lazy dog.", digester);
 
-		// hash is always fixed length.
-		hashText("The quick brown fox jumped ower the lazy dog and a lot more stuff happened after that.", digester);
 
 	}
 
-	private void hashText(String s, MessageDigest digester) throws NoSuchAlgorithmException {
+	private void hashText(String s, MessageDigest digester) {
 		byte[] input = s.getBytes();
 		byte[] digest = digester.digest(input);
 		System.out.println("Input: " + s);
 		System.out.println("Digest: " + Utils.byteArrayToHexString(digest));
 		System.out.println("length of digest:" + digest.length);
+		System.out.println("\r\n");
 	}
 }

@@ -20,18 +20,23 @@ public class ASymmetricEncryptionDemo {
         KeyPairGenerator kpGen = KeyPairGenerator.getInstance("RSA");
         kpGen.initialize(1024);
         KeyPair keyPair = kpGen.generateKeyPair();
+        Utils.printByteArray("private key", keyPair.getPrivate().getEncoded());
+        Utils.printByteArray("public key", keyPair.getPublic().getEncoded());
 
 
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.ENCRYPT_MODE, keyPair.getPrivate());
 
         byte[] text = Files.readAllBytes(Path.of("justright.txt"));
+        Utils.printText("plain text", text);
+
+        //encrypt
         byte[] encryptedText = cipher.doFinal(text);
+        Utils.printByteArray("ciphertext", encryptedText);
 
         cipher.init(Cipher.DECRYPT_MODE, keyPair.getPublic());
         byte[] plainText = cipher.doFinal(encryptedText);
-
-        System.out.println("decoded text : " + new String(plainText));
+        Utils.printText("decoded text", plainText);
 
     }
 

@@ -1,6 +1,7 @@
 package nl.ordina.crypto;
 
 import nl.ordina.crypto.util.Utils;
+import org.apache.commons.codec.binary.Hex;
 import org.bouncycastle.util.encoders.Base64;
 import org.junit.Test;
 
@@ -19,32 +20,28 @@ public class SymmetricEncryptionECBDemo {
     //6. Notice pattern in ECB
 
     @Test
-    public void testSymmetricEncryption() throws GeneralSecurityException, UnsupportedEncodingException {
+    public void testSymmetricEncryption() throws GeneralSecurityException {
 
         // make key
         KeyGenerator generator = KeyGenerator.getInstance("AES");
         // specify we want a key length of 192 bits, allowed for AES
         generator.init(192);
         Key key = generator.generateKey();
-        System.out.println("key: " + Utils.byteArrayToHexString(key.getEncoded()));
-        System.out.println("key length: " + key.getEncoded().length);
+        Utils.printByteArray("key", key.getEncoded());
 
         // make some input
-        byte[] input = "JFokus!!".repeat(16).getBytes("UTF-8");
-        System.out.println("input text : " + new String(input) + "\r\ninput text length: " + input.length);
-        System.out.println("input length:" + input.length);
+        byte[] input = "JFokus!!".repeat(16).getBytes();
+        Utils.printText("input", input);
 
         Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
         cipher.init(Cipher.ENCRYPT_MODE, key);
         byte[] encryptedOutput = cipher.doFinal(input);
-        System.out.println("cipher text: " + new String(Base64.encode(encryptedOutput)) + "\r\ncipher text length: "
-                + encryptedOutput.length);
-        System.out.println("hexadecimal: " + Utils.byteArrayToHexString(encryptedOutput));
+        Utils.printByteArray("ciphertext", encryptedOutput);
 
         // decryption pass
         cipher.init(Cipher.DECRYPT_MODE, key);
         byte[] decryptedOutput = cipher.doFinal(encryptedOutput);
-        System.out.println("decoded text : " + new String(decryptedOutput) + "\r\nlength: " + decryptedOutput.length);
+        Utils.printText("decoded input", decryptedOutput);
     }
 
 }
