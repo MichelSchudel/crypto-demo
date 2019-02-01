@@ -1,18 +1,14 @@
 package nl.ordina.crypto;
 
-import java.io.UnsupportedEncodingException;
-import java.security.GeneralSecurityException;
-import java.security.Key;
-import java.security.SecureRandom;
+import nl.ordina.crypto.util.Utils;
+import org.junit.Test;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.IvParameterSpec;
-
-import nl.ordina.crypto.util.Utils;
-
-import org.bouncycastle.util.encoders.Base64;
-import org.junit.Test;
+import java.security.GeneralSecurityException;
+import java.security.Key;
+import java.security.SecureRandom;
 
 public class SymmetricEncryptionCBCDemo {
 

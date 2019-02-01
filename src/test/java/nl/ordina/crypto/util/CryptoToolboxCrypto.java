@@ -1,5 +1,12 @@
 package nl.ordina.crypto.util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.ws.security.WSSecurityException;
+import org.apache.ws.security.components.crypto.CredentialException;
+import org.apache.ws.security.components.crypto.Merlin;
+
+import javax.security.auth.x500.X500Principal;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -9,14 +16,6 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.util.Enumeration;
 import java.util.Properties;
-
-import javax.security.auth.x500.X500Principal;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.ws.security.WSSecurityException;
-import org.apache.ws.security.components.crypto.CredentialException;
-import org.apache.ws.security.components.crypto.Merlin;
 
 /**
  * Extension of Merlin class to fix bug WS-218 of WSS4J where the alias lookup based on a serial and issuer fails if

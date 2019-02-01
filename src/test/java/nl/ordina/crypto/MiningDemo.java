@@ -1,13 +1,10 @@
 package nl.ordina.crypto;
 
-import nl.ordina.crypto.util.Utils;
 import org.apache.commons.codec.binary.Hex;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.junit.Test;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.Security;
 import java.util.ArrayList;
 import java.util.List;
 

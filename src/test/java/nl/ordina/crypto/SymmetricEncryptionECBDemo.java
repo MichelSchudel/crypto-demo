@@ -1,13 +1,10 @@
 package nl.ordina.crypto;
 
 import nl.ordina.crypto.util.Utils;
-import org.apache.commons.codec.binary.Hex;
-import org.bouncycastle.util.encoders.Base64;
 import org.junit.Test;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
-import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.Key;
 

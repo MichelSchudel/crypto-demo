@@ -1,7 +1,6 @@
 package nl.ordina.crypto;
 
 import nl.ordina.crypto.util.Utils;
-import org.bouncycastle.util.encoders.Base64;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -9,7 +8,6 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.SecureRandom;
-import java.util.Arrays;
 
 public class WalletEncryptionDemo {
 

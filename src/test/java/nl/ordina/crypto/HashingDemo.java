@@ -1,14 +1,12 @@
 package nl.ordina.crypto;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.Security;
-
 import nl.ordina.crypto.util.Utils;
-
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.junit.Test;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.Security;
 
 /**
  * A small message digest demo.

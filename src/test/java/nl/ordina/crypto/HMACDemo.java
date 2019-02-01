@@ -8,7 +8,6 @@ import javax.crypto.Mac;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 
 import static org.junit.Assert.assertEquals;
 
