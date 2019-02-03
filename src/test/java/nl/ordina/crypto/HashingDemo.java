@@ -34,13 +34,14 @@ public class HashingDemo {
 		System.out.println("deterministic");
 		hashText("The quick brown fox jumped over the lazy dog.", digester);
 
+		// psuedorandom, new digest looks nothing like old digest
+		System.out.println("psuedorandom");
+		hashText("The quick brown fox jumped ower the lazy dog.", digester);
+
 		// hash is always fixed length.
 		System.out.println("fixedlength");
 		hashText("The quick brown fox jumped ower the lazy dog and a lot more stuff happened after that.", digester);
 
-		// psuedorandom, new digest looks nothing like old digest
-		System.out.println("psuedorandom");
-		hashText("The quick brown fox jumped ower the lazy dog.", digester);
 
 
 	}

@@ -30,7 +30,7 @@ public class SymmetricEncryptionECBDemo {
         byte[] input = "JFokus!!".repeat(16).getBytes();
         Utils.printText("input", input);
 
-        Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
+        Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.ENCRYPT_MODE, key);
         byte[] encryptedOutput = cipher.doFinal(input);
         Utils.printByteArray("ciphertext", encryptedOutput);
