@@ -42,5 +42,6 @@ public class WalletEncryptionDemo {
 
         byte[] plainText = cipher.doFinal(cipherText);
         Utils.printText("Decrypted wallet: ",  plainText);
+
     }
 }

@@ -19,23 +19,19 @@ public class HMACDemo {
         // make key
         KeyGenerator generator = KeyGenerator.getInstance("HMACSha256");
         Key key = generator.generateKey();
-        System.out.println("key: " + Utils.byteArrayToHexString(key.getEncoded()));
-        System.out.println("key length: " + key.getEncoded().length);
+        Utils.printByteArray("hmac key", key.getEncoded());
 
         // create signature
         Mac mac = Mac.getInstance("HMACSha256");
         mac.init(key);
         byte[] input = "Hello, world!".getBytes();
         byte[] signature = mac.doFinal(input);
-        System.out.println("Signature:" + Utils.byteArrayToHexString(signature));
+        Utils.printByteArray("Signature", signature);
 
-        // validation of signature
+        // validation of signature on the other end
         mac.init(key);
         byte[] newSignature = mac.doFinal(input);
-        System.out.println("New signature:" + Utils.byteArrayToHexString(newSignature));
-
-        // now compare newly generated signature with received signature
-        assertEquals(new String(signature), new String(newSignature));
+        Utils.printByteArray("Recomputed signature", newSignature);
 
     }
 }
