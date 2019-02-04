@@ -21,6 +21,7 @@ public class WalletEncryptionDemo {
         int iterations = 65536;
         byte[] salt = new SecureRandom().generateSeed(saltLength);
         PBEKeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, iterations, keyLength);
+
         SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256", "BC");
         SecretKey passwordKey = secretKeyFactory.generateSecret(keySpec);
 

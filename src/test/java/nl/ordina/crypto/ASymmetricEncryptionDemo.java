@@ -24,13 +24,14 @@ public class ASymmetricEncryptionDemo {
         Utils.printByteArray("public key", keyPair.getPublic().getEncoded());
 
 
-        Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.ENCRYPT_MODE, keyPair.getPrivate());
 
         byte[] text = Files.readAllBytes(Path.of("justright.txt"));
         Utils.printText("plain text", text);
 
         //encrypt
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.ENCRYPT_MODE, keyPair.getPrivate());
+
         byte[] encryptedText = cipher.doFinal(text);
         Utils.printByteArray("ciphertext", encryptedText);
 

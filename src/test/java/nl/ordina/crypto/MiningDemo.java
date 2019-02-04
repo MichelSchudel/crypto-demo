@@ -13,62 +13,60 @@ import java.util.List;
  */
 public class MiningDemo {
 
-	class Block {
-		List<Transaction> transactions = new ArrayList<>();
-		int nonce = 0;
+    class Block {
+        List<Transaction> transactions = new ArrayList<>();
+        int nonce = 0;
 
-		@Override
-		public String toString() {
-			return "Block{" +
-					"transactions=" + transactions +
-					", nonce=" + nonce +
-					'}';
-		}
-	}
-	class Transaction {
+        @Override
+        public String toString() {
+            return "Block{" +
+                    "transactions=" + transactions +
+                    ", nonce=" + nonce +
+                    '}';
+        }
+    }
 
-		public Transaction(String from, String to, int amount) {
-			this.from = from;
-			this.to = to;
-			this.amount = amount;
-		}
+    class Transaction {
 
-		String from;
-		String to;
-		int amount;
+        public Transaction(String from, String to, int amount) {
+            this.from = from;
+            this.to = to;
+            this.amount = amount;
+        }
 
-		@Override
-		public String toString() {
-			return "Transaction{" +
-					"from='" + from + '\'' +
-					", to='" + to + '\'' +
-					", amount=" + amount +
-					'}';
-		}
-	}
-	//1. show hash
-	//2. change one letter
-	//3. Make the message longer
-	//4. Change provider
+        String from;
+        String to;
+        int amount;
 
-	@Test
-	public void miningDemo() throws NoSuchAlgorithmException {
+        @Override
+        public String toString() {
+            return "Transaction{" +
+                    "from='" + from + '\'' +
+                    ", to='" + to + '\'' +
+                    ", amount=" + amount +
+                    '}';
+        }
+    }
 
-		//setup block
-		Transaction transaction = new Transaction("michel", "jfokus", 10);
-		Block block = new Block();
-		block.transactions.add(transaction);
+    @Test
+    public void miningDemo() throws NoSuchAlgorithmException {
 
-		MessageDigest digester = MessageDigest.getInstance("SHA-256");
 
-		while (!(digester.digest(block.toString().getBytes())[0] == 0)) {
-			System.out.println("block" + block + " has hash " + Hex.encodeHexString(digester.digest(block.toString().getBytes())) + ", not good enough!");
-			block.nonce++;
-		}
+        //setup block
+        Transaction transaction = new Transaction("michel", "jfokus", 10);
+        Block block = new Block();
+        block.transactions.add(transaction);
 
-		System.out.println("block" + block + " has hash " + Hex.encodeHexString(digester.digest(block.toString().getBytes())));
-		System.out.println("block took " + block.nonce + " iterations to seal.");
 
-	}
+        MessageDigest digester = MessageDigest.getInstance("SHA-256");
+
+        while (!(digester.digest(block.toString().getBytes())[0] == 0)) {
+            System.out.println("block" + block + " has hash " + Hex.encodeHexString(digester.digest(block.toString().getBytes())) + ", not good enough!");
+            block.nonce++;
+        }
+
+        System.out.println("block" + block + " has hash " + Hex.encodeHexString(digester.digest(block.toString().getBytes())));
+        System.out.println("block took " + block.nonce + " iterations to seal.");
+    }
 
 }
