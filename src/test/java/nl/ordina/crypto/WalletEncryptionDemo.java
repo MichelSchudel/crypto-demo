@@ -14,11 +14,13 @@ public class WalletEncryptionDemo {
     public static void main(String[] args) throws Exception {
         Utils.loadProvider();
 
+
+
         //generate a secret key from a password
         String password = "password";
         int keyLength = 256;
         int saltLength = keyLength / 8; // It's bytes, not bits.
-        int iterations = 65536;
+        int iterations = 100;
         byte[] salt = new SecureRandom().generateSeed(saltLength);
         PBEKeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, iterations, keyLength);
 
