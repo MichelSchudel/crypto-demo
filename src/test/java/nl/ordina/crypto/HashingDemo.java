@@ -13,45 +13,34 @@ import java.security.Security;
  */
 public class HashingDemo {
 
-	//1. show hash
-	//2. change one letter
-	//3. Make the message longer
-	//4. Change provider
-
 	@Test
-	public void testCryptoDemo() throws NoSuchAlgorithmException {
-		// Add BouncyCastle to security providers.
-		Security.addProvider(new BouncyCastleProvider());
-
-		//MessageDigest digester = MessageDigest.getInstance("SHA-256");
-		MessageDigest digester = MessageDigest.getInstance("SHA-256");
+	public void hashingDemo() throws NoSuchAlgorithmException {
 
 		// get a message digest
 		System.out.println("one way only!");
-		hashText("The quick brown fox jumped over the lazy dog.", digester);
+		hashText("The quick brown fox jumped over the lazy dog.");
 
 		//hash it again, deterministic
 		System.out.println("deterministic");
-		hashText("The quick brown fox jumped over the lazy dog.", digester);
+		hashText("The quick brown fox jumped over the lazy dog.");
 
 		// psuedorandom, new digest looks nothing like old digest
 		System.out.println("psuedorandom");
-		hashText("The quick brown fox jumped ower the lazy dog.", digester);
+		hashText("The quick brown fox jumped ower the lazy dog.");
 
 		// hash is always fixed length.
 		System.out.println("fixedlength");
-		hashText("The quick brown fox jumped ower the lazy dog and a lot more stuff happened after that.", digester);
+		hashText("The quick brown fox jumped ower the lazy dog and a lot more stuff happened after that.");
 
 
 
 	}
 
-	private void hashText(String s, MessageDigest digester) {
+	private void hashText(String s) throws NoSuchAlgorithmException {
+		MessageDigest digester = MessageDigest.getInstance("SHA-256");
 		byte[] input = s.getBytes();
 		byte[] digest = digester.digest(input);
 		System.out.println("Input: " + s);
-		System.out.println("Digest: " + Utils.byteArrayToHexString(digest));
-		System.out.println("length of digest:" + digest.length);
-		System.out.println("\r\n");
+		Utils.printByteArray("Digest", digest);
 	}
 }

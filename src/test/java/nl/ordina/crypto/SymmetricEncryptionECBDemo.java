@@ -33,9 +33,12 @@ public class SymmetricEncryptionECBDemo {
         byte[] encryptedOutput = cipher.doFinal(input);
         Utils.printByteArray("ciphertext", encryptedOutput);
 
+        //decryption on the other end
         cipher.init(Cipher.DECRYPT_MODE, key);
         byte[] decryptedOutput = cipher.doFinal(encryptedOutput);
         Utils.printText("decoded input", decryptedOutput);
+
+
     }
 
 }

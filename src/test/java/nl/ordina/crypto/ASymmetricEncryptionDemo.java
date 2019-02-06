@@ -25,17 +25,20 @@ public class ASymmetricEncryptionDemo {
 
 
 
-        byte[] text = Files.readAllBytes(Path.of("justright.txt"));
+        byte[] text = "The Lord of the Rings has been read by many people".getBytes();
         Utils.printText("plain text", text);
 
         //encrypt
         Cipher cipher = Cipher.getInstance("RSA");
+
         cipher.init(Cipher.ENCRYPT_MODE, keyPair.getPrivate());
 
         byte[] encryptedText = cipher.doFinal(text);
         Utils.printByteArray("ciphertext", encryptedText);
 
+        //decrypt
         cipher.init(Cipher.DECRYPT_MODE, keyPair.getPublic());
+
         byte[] plainText = cipher.doFinal(encryptedText);
         Utils.printText("decoded text", plainText);
 

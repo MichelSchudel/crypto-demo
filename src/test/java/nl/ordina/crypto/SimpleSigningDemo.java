@@ -22,19 +22,18 @@ public class SimpleSigningDemo {
 
         String data = "JFokus is the best!!!";
 
-        // create signature
         Signature signatureAlgorithm = Signature.getInstance("SHA256WithRSA");
         signatureAlgorithm.initSign(keyPair.getPrivate());
         signatureAlgorithm.update(data.getBytes());
         byte[] signature = signatureAlgorithm.sign();
         Utils.printByteArray("signature", signature);
 
+        //verification on the other end
         Signature verificationAlgorithm = Signature.getInstance("SHA256WithRSA");
         verificationAlgorithm.initVerify(keyPair.getPublic());
         verificationAlgorithm.update(data.getBytes());
         boolean matches = verificationAlgorithm.verify(signature);
         System.out.println("signature matches: " + matches);
-
     }
 
 }
