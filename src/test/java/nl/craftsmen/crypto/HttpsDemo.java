@@ -1,4 +1,4 @@
-package nl.ordina.crypto;
+package nl.craftsmen.crypto;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLPeerUnverifiedException;

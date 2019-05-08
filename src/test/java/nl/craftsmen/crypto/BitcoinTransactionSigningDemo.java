@@ -1,4 +1,4 @@
-package nl.ordina.crypto;
+package nl.craftsmen.crypto;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
@@ -41,11 +41,11 @@ public class BitcoinTransactionSigningDemo {
         KeyPairGenerator kpGen = KeyPairGenerator.getInstance("RSA");
         kpGen.initialize(1024);
         KeyPair michelKeyPair = kpGen.generateKeyPair();
-        KeyPair jfokusKeyPair = kpGen.generateKeyPair();
+        KeyPair devoxxKeyPair = kpGen.generateKeyPair();
 
         Transaction transaction = new Transaction(
                 Hex.encodeHexString(michelKeyPair.getPublic().getEncoded()),
-                Hex.encodeHexString(jfokusKeyPair.getPublic().getEncoded()),
+                Hex.encodeHexString(devoxxKeyPair.getPublic().getEncoded()),
                 5);
 
         String data = transaction.from + transaction.to + transaction.amount;

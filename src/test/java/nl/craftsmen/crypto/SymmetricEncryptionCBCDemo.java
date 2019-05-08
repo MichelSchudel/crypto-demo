@@ -1,6 +1,6 @@
-package nl.ordina.crypto;
+package nl.craftsmen.crypto;
 
-import nl.ordina.crypto.util.Utils;
+import nl.craftsmen.crypto.util.Utils;
 import org.junit.Test;
 
 import javax.crypto.Cipher;
@@ -21,6 +21,7 @@ public class SymmetricEncryptionCBCDemo {
     @Test
     public void testSymmetricEncryption() throws GeneralSecurityException {
 
+
         //make key
         KeyGenerator generator = KeyGenerator.getInstance("AES");
         // specify we want a key length of 192 bits, allowed for AES
@@ -37,7 +38,7 @@ public class SymmetricEncryptionCBCDemo {
         Utils.printByteArray("ivSpec", random);
 
         //input
-        byte[] input = "JFokus!!".repeat(16).getBytes();
+        byte[] input = "Devoxx!!".repeat(16).getBytes();
         Utils.printText("input", input);
 
         //encryption

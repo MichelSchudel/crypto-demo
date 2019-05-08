@@ -1,13 +1,10 @@
-package nl.ordina.crypto;
+package nl.craftsmen.crypto;
 
-import nl.ordina.crypto.util.Utils;
+import nl.craftsmen.crypto.util.Utils;
 import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.Hex;
 import org.junit.Test;
 
 import java.security.*;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.X509EncodedKeySpec;
 
 public class SimpleSigningDemo {
 
@@ -20,7 +17,7 @@ public class SimpleSigningDemo {
         Utils.printByteArray("private key", keyPair.getPrivate().getEncoded());
         Utils.printByteArray("public key", keyPair.getPublic().getEncoded());
 
-        String data = "JFokus is the best!!!";
+        String data = "Devoxx is the best!!!";
 
         Signature signatureAlgorithm = Signature.getInstance("SHA256WithRSA");
         signatureAlgorithm.initSign(keyPair.getPrivate());

@@ -1,17 +1,24 @@
-package nl.ordina.crypto;
+package nl.craftsmen.crypto;
 
-import nl.ordina.crypto.util.Utils;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import nl.craftsmen.crypto.util.Utils;
+
 import org.junit.Test;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.Security;
 
 /**
  * A small message digest demo.
  */
 public class HashingDemo {
+
+	private void hashText(String s) throws NoSuchAlgorithmException {
+		MessageDigest digester = MessageDigest.getInstance("SHA-256");
+		byte[] input = s.getBytes();
+		byte[] digest = digester.digest(input);
+		System.out.println("Input: " + s);
+		Utils.printByteArray("Digest", digest);
+	}
 
 	@Test
 	public void hashingDemo() throws NoSuchAlgorithmException {
@@ -36,11 +43,5 @@ public class HashingDemo {
 
 	}
 
-	private void hashText(String s) throws NoSuchAlgorithmException {
-		MessageDigest digester = MessageDigest.getInstance("SHA-256");
-		byte[] input = s.getBytes();
-		byte[] digest = digester.digest(input);
-		System.out.println("Input: " + s);
-		Utils.printByteArray("Digest", digest);
-	}
+
 }

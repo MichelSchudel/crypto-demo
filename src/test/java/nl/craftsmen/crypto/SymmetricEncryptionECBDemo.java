@@ -1,6 +1,6 @@
-package nl.ordina.crypto;
+package nl.craftsmen.crypto;
 
-import nl.ordina.crypto.util.Utils;
+import nl.craftsmen.crypto.util.Utils;
 import org.junit.Test;
 
 import javax.crypto.Cipher;
@@ -19,13 +19,14 @@ public class SymmetricEncryptionECBDemo {
     @Test
     public void testSymmetricEncryption() throws GeneralSecurityException {
 
+
         KeyGenerator generator = KeyGenerator.getInstance("AES");
         // specify we want a key length of 192 bits, allowed for AES
         generator.init(192);
         Key key = generator.generateKey();
         Utils.printByteArray("key", key.getEncoded());
 
-        byte[] input = "JFokus!!".repeat(16).getBytes();
+        byte[] input = "Devoxx!!".repeat(16).getBytes();
         Utils.printText("input", input);
 
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
