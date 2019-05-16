@@ -13,9 +13,9 @@ import java.security.NoSuchAlgorithmException;
 public class HashingDemo {
 
 	private void hashText(String s) throws NoSuchAlgorithmException {
-		MessageDigest digester = MessageDigest.getInstance("SHA-256");
+		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
 		byte[] input = s.getBytes();
-		byte[] digest = digester.digest(input);
+		byte[] digest = messageDigest.digest(input);
 		System.out.println("Input: " + s);
 		Utils.printByteArray("Digest", digest);
 	}
