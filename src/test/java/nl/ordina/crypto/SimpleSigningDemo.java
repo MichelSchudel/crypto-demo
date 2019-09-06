@@ -20,7 +20,7 @@ public class SimpleSigningDemo {
         Utils.printByteArray("private key", keyPair.getPrivate().getEncoded());
         Utils.printByteArray("public key", keyPair.getPublic().getEncoded());
 
-        String data = "JFokus is the best!!!";
+        String data = "JavaZone is the best!!!";
 
         Signature signatureAlgorithm = Signature.getInstance("SHA256WithRSA");
         signatureAlgorithm.initSign(keyPair.getPrivate());
