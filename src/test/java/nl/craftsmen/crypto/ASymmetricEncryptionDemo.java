@@ -1,6 +1,7 @@
-package nl.ordina.crypto;
+package nl.craftsmen.crypto;
 
-import nl.ordina.crypto.util.Utils;
+import nl.craftsmen.crypto.util.Utils;
+
 import org.junit.Test;
 
 import javax.crypto.BadPaddingException;

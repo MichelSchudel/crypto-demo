@@ -1,4 +1,4 @@
-package nl.ordina.crypto.util;
+package nl.craftsmen.crypto.util;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.ws.security.util.DOM2Writer;
