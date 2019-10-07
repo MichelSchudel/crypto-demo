@@ -1,3 +1,5 @@
+myStore.pkcs12
+signed.pdf
 *.iml
 .idea
 target
