@@ -1,5 +1,6 @@
 package nl.craftsmen.crypto;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,12 +11,14 @@ import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
+import java.security.Provider;
+import java.security.Signature;
 import java.security.SignatureException;
 import java.security.UnrecoverableKeyException;
-import java.security.cert.CertStore;
+import java.security.cert.CertPathValidator;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
+import java.security.cert.CertificateFactory;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -38,7 +41,7 @@ import org.bouncycastle.util.Store;
 
 public class PdfSignDemo {
 
-    private static BouncyCastleProvider provider = new BouncyCastleProvider();
+    private static Provider provider = new BouncyCastleProvider();
 
     private static PrivateKey privKey;
 
@@ -62,7 +65,9 @@ public class PdfSignDemo {
     }
 
     public static void verifySignature() throws Exception {
+        //File signedFile = new File("test_uwv_pdf.pdf");
         File signedFile = new File("signed.pdf");
+        //File signedFile = new File("pdf_digital_signature_timestamp.pdf");
         // We load the signed document.
         PDDocument document = PDDocument.load(signedFile);
         List<PDSignature> signatureDictionaries = document.getSignatureDictionaries();
@@ -75,21 +80,35 @@ public class PdfSignDemo {
             CMSProcessable cmsProcessableInputStream = new CMSProcessableByteArray(signedContent);
             CMSSignedData cmsSignedData = new CMSSignedData(cmsProcessableInputStream, signatureContent);
             SignerInformationStore signerInformationStore = cmsSignedData.getSignerInfos();
-            Collection<SignerInformation> signers = signerInformationStore.getSigners();
-            Store<X509CertificateHolder> certs = cmsSignedData.getCertificates();
-            Store<X509CRLHolder> crls = cmsSignedData.getCRLs();
-            Iterator<SignerInformation> signersIterator = signers.iterator();
-            while (signersIterator.hasNext()) {
-                SignerInformation signerInformation = signersIterator.next();
-                Collection<X509CertificateHolder> certificates = certs.getMatches(signerInformation.getSID());
-                Iterator<X509CertificateHolder> certIt = certificates.iterator();
-                X509CertificateHolder signerCertificate = certIt.next();
+            Collection<SignerInformation> signerInformationList = signerInformationStore.getSigners();
+            Store<X509CertificateHolder> certificateHolderStore = cmsSignedData.getCertificates();
+            Store<X509CRLHolder> crlHolderStore = cmsSignedData.getCRLs();
+            Iterator<SignerInformation> signerInformationIterator = signerInformationList.iterator();
+            while (signerInformationIterator.hasNext()) {
+                SignerInformation signerInformation = signerInformationIterator.next();
+                Collection<X509CertificateHolder> certificateHolders = certificateHolderStore.getMatches(signerInformation.getSID());
+                Iterator<X509CertificateHolder> certificateHolderIterator = certificateHolders.iterator();
+                X509CertificateHolder signerCertificate = certificateHolderIterator.next();
                 // And here we validate the document signature.
-                SignerInformationVerifier siv = new JcaSimpleSignerInfoVerifierBuilder().setProvider(provider).build(signerCertificate);
+                SignerInformationVerifier siv = new JcaSimpleSignerInfoVerifierBuilder().setProvider(provider)
+                        .build(signerCertificate);
+
+                //alternate
+//                CertificateFactory certificateFactory = CertificateFactory.getInstance("X509");
+//                Certificate certificate = certificateFactory.generateCertificate(new ByteArrayInputStream(signerCertificate.getEncoded()));
+//
+//                Signature signature = Signature.getInstance("SHA256withRSA", provider);
+//                signature.initVerify(certificate.getPublicKey());
+//                signature.update(signedContent);
+
+//                boolean result = signature.verify(signerInformation.getSignature());
+
+//                System.out.println(result);
 
                 if (signerInformation.verify(siv)) {
                     System.out.println("PDF signature verification is correct.");
                     // IMPORTANT: Note that you should usually validate the signing certificate in this phase, e.g. trust, validity, revocation, etc. See http://www.nakov.com/blog/2009/12/01/x509-certificate-validation-in-java-build-and-verify-chain-and-verify-clr-with-bouncy-castle/.
+                    CertPathValidator certPathValidator = CertPathValidator.getInstance("PKIX");
                 } else {
                     System.out.println("PDF signature verification failed.");
                 }
@@ -99,11 +118,11 @@ public class PdfSignDemo {
 
     static void addSignature(PDDocument pdDocument, String filePath, String pwd) throws Exception {
         File ksFile = new File(filePath);
-        KeyStore keystore = KeyStore.getInstance("PKCS12", provider);
+        KeyStore keystore = KeyStore.getInstance("PKCS12");
         char[] pin = pwd.toCharArray();
         keystore.load(new FileInputStream(ksFile), pin);
         loadKeystore(keystore, pin);
-        CmsSigner cmsSigner = new CmsSigner(new BouncyCastleProvider(), privKey, cert);
+        CmsSigner cmsSigner = new CmsSigner(provider, privKey, cert);
         //signing.signPDF(document);
 
         // create signature dictionary

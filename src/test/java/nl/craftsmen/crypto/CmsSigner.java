@@ -22,7 +22,6 @@ import org.bouncycastle.cms.CMSSignedData;
 import org.bouncycastle.cms.CMSSignedDataGenerator;
 import org.bouncycastle.cms.CMSTypedData;
 import org.bouncycastle.cms.jcajce.JcaSignerInfoGeneratorBuilder;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder;
@@ -40,6 +39,7 @@ public class CmsSigner implements SignatureInterface {
         this.cert = certificates;
         this.provider = provider;
     }
+
     @Override
     public byte[] sign(InputStream content) throws IOException {
         CMSProcessableInputStream input = new CMSProcessableInputStream(content);
@@ -47,16 +47,18 @@ public class CmsSigner implements SignatureInterface {
         // CertificateChain
         List<Certificate> certList = Arrays.asList(cert);
 
-        Security.addProvider(provider);
+        if (Security.getProvider(provider.getName()) == null) {
+            Security.addProvider(provider);
+        }
 
         CertStore certStore = null;
         try {
             certStore = CertStore.getInstance("Collection", new CollectionCertStoreParameters(certList), provider);
-            ContentSigner sha256Signer = new JcaContentSignerBuilder("SHA256withRSA").setProvider(BouncyCastleProvider.PROVIDER_NAME)
+            ContentSigner sha256Signer = new JcaContentSignerBuilder("SHA256withRSA").setProvider(provider)
                     .build(privKey);
 
             JcaCertStore jcaCertStore = new JcaCertStore(certList);
-            gen.addSignerInfoGenerator(new JcaSignerInfoGeneratorBuilder(new JcaDigestCalculatorProviderBuilder().setProvider(BouncyCastleProvider.PROVIDER_NAME)
+            gen.addSignerInfoGenerator(new JcaSignerInfoGeneratorBuilder(new JcaDigestCalculatorProviderBuilder().setProvider(provider)
                     .build()).build(sha256Signer, (X509Certificate) certList.get(0)));
             gen.addCertificates(jcaCertStore);
             gen.addCRLs(jcaCertStore);
@@ -72,6 +74,7 @@ public class CmsSigner implements SignatureInterface {
         throw new RuntimeException("Problem while preparing signature");
     }
 }
+
 class CMSProcessableInputStream implements CMSProcessable {
 
     InputStream in;
