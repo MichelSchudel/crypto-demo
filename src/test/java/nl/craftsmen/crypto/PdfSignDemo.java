@@ -50,6 +50,7 @@ public class PdfSignDemo {
     public static void main(String[] args)
             throws KeyStoreException, NoSuchAlgorithmException, CertificateException, FileNotFoundException, IOException, SignatureException, Exception {
 
+        verifySignature();
         InputStream documentStream = PdfSignDemo.class.getResourceAsStream("/sample.pdf");
         PDDocument pdDocument = PDDocument.load(documentStream);
 
@@ -66,8 +67,8 @@ public class PdfSignDemo {
 
     public static void verifySignature() throws Exception {
         //File signedFile = new File("test_uwv_pdf.pdf");
-        File signedFile = new File("signed.pdf");
-        //File signedFile = new File("pdf_digital_signature_timestamp.pdf");
+        //File signedFile = new File("signed.pdf");
+        File signedFile = new File("pdf_digital_signature_timestamp.pdf");
         // We load the signed document.
         PDDocument document = PDDocument.load(signedFile);
         List<PDSignature> signatureDictionaries = document.getSignatureDictionaries();
@@ -94,16 +95,16 @@ public class PdfSignDemo {
                         .build(signerCertificate);
 
                 //alternate
-//                CertificateFactory certificateFactory = CertificateFactory.getInstance("X509");
-//                Certificate certificate = certificateFactory.generateCertificate(new ByteArrayInputStream(signerCertificate.getEncoded()));
-//
-//                Signature signature = Signature.getInstance("SHA256withRSA", provider);
-//                signature.initVerify(certificate.getPublicKey());
-//                signature.update(signedContent);
+                CertificateFactory certificateFactory = CertificateFactory.getInstance("X509");
+                Certificate certificate = certificateFactory.generateCertificate(new ByteArrayInputStream(signerCertificate.getEncoded()));
 
-//                boolean result = signature.verify(signerInformation.getSignature());
+                Signature signature = Signature.getInstance("SHA256withRSA", provider);
+                signature.initVerify(certificate.getPublicKey());
+                signature.update(signedContent);
 
-//                System.out.println(result);
+                boolean result = signature.verify(signerInformation.getSignature());
+
+                System.out.println(result);
 
                 if (signerInformation.verify(siv)) {
                     System.out.println("PDF signature verification is correct.");
