@@ -41,11 +41,11 @@ public class BitcoinTransactionSigningDemo {
         KeyPairGenerator kpGen = KeyPairGenerator.getInstance("RSA");
         kpGen.initialize(1024);
         KeyPair michelKeyPair = kpGen.generateKeyPair();
-        KeyPair javaZoneKeyPair = kpGen.generateKeyPair();
+        KeyPair jFallKeyPair = kpGen.generateKeyPair();
 
         Transaction transaction = new Transaction(
                 Hex.encodeHexString(michelKeyPair.getPublic().getEncoded()),
-                Hex.encodeHexString(javaZoneKeyPair.getPublic().getEncoded()),
+                Hex.encodeHexString(jFallKeyPair.getPublic().getEncoded()),
                 5);
 
         String data = transaction.from + transaction.to + transaction.amount;

@@ -19,14 +19,13 @@ public class SymmetricEncryptionECBDemo {
     @Test
     public void testSymmetricEncryption() throws GeneralSecurityException {
 
-
         KeyGenerator generator = KeyGenerator.getInstance("AES");
         // specify we want a key length of 192 bits, allowed for AES
         generator.init(192);
         Key key = generator.generateKey();
         Utils.printByteArray("key", key.getEncoded());
 
-        byte[] input = "JavaZone".repeat(16).getBytes();
+        byte[] input = "J-Fall!!".repeat(16).getBytes();
         Utils.printText("input", input);
 
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
