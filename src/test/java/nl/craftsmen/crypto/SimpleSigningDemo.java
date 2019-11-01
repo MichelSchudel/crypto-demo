@@ -17,7 +17,7 @@ public class SimpleSigningDemo {
         Utils.printByteArray("private key", keyPair.getPrivate().getEncoded());
         Utils.printByteArray("public key", keyPair.getPublic().getEncoded());
 
-        String data = "J-Fall is the best!!!";
+        String data = "Devoxx is the best!!!";
 
         Signature signatureAlgorithm = Signature.getInstance("SHA256WithRSA");
         signatureAlgorithm.initSign(keyPair.getPrivate());

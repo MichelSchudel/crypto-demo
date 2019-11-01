@@ -25,7 +25,7 @@ public class SymmetricEncryptionECBDemo {
         Key key = generator.generateKey();
         Utils.printByteArray("key", key.getEncoded());
 
-        byte[] input = "J-Fall!!".repeat(16).getBytes();
+        byte[] input = "Devoxx!!".repeat(16).getBytes();
         Utils.printText("input", input);
 
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
