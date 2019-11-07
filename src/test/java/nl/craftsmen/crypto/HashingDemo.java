@@ -12,14 +12,6 @@ import java.security.NoSuchAlgorithmException;
  */
 public class HashingDemo {
 
-	private void hashText(String s) throws NoSuchAlgorithmException {
-		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-		byte[] input = s.getBytes();
-		byte[] digest = messageDigest.digest(input);
-		System.out.println("Input: " + s);
-		Utils.printByteArray("Digest", digest);
-	}
-
 	@Test
 	public void hashingDemo() throws NoSuchAlgorithmException {
 
@@ -38,8 +30,13 @@ public class HashingDemo {
 		// hash is always fixed length.
 		System.out.println("fixedlength");
 		hashText("The quick brown fox jumped ower the lazy dog and a lot more stuff happened after that.");
+	}
 
-
+	private void hashText(String data) throws NoSuchAlgorithmException {
+		System.out.println("Input: " + data);
+		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+		byte[] digest = messageDigest.digest(data.getBytes());
+		Utils.printByteArray("Digest", digest);
 
 	}
 
