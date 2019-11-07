@@ -1,5 +1,8 @@
 package nl.craftsmen.crypto;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
+
 import nl.craftsmen.crypto.util.Utils;
 import org.apache.commons.codec.DecoderException;
 import org.junit.Test;
@@ -22,15 +25,22 @@ public class SimpleSigningDemo {
         Signature signatureAlgorithm = Signature.getInstance("SHA256WithRSA");
         signatureAlgorithm.initSign(keyPair.getPrivate());
         signatureAlgorithm.update(data.getBytes());
+
         byte[] signature = signatureAlgorithm.sign();
+
         Utils.printByteArray("signature", signature);
 
         //verification on the other end
+        String receivedData = "Devoxx is the best!!!";
+
         Signature verificationAlgorithm = Signature.getInstance("SHA256WithRSA");
         verificationAlgorithm.initVerify(keyPair.getPublic());
-        verificationAlgorithm.update(data.getBytes());
+        verificationAlgorithm.update(receivedData.getBytes());
+
         boolean matches = verificationAlgorithm.verify(signature);
+
         System.out.println("signature matches: " + matches);
+        assertThat(matches).isTrue();
     }
 
 }
