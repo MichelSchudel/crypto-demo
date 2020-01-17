@@ -30,8 +30,10 @@ public class SimpleSigningDemo {
 
         Utils.printByteArray("signature", signature);
 
+
+
         //verification on the other end
-        String receivedData = "Devoxx is the best!!!";
+        String receivedData = "Devoxx is the worst!!!";
 
         Signature verificationAlgorithm = Signature.getInstance("SHA256WithRSA");
         verificationAlgorithm.initVerify(keyPair.getPublic());

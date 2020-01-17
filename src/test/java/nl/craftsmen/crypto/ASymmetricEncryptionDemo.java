@@ -37,6 +37,9 @@ public class ASymmetricEncryptionDemo {
         byte[] encryptedText = cipher.doFinal(text);
         Utils.printByteArray("ciphertext", encryptedText);
 
+
+
+
         //decrypt
         cipher.init(Cipher.DECRYPT_MODE, keyPair.getPublic());
 

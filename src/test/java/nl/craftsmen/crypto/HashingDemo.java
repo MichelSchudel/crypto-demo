@@ -37,7 +37,6 @@ public class HashingDemo {
 		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
 		byte[] digest = messageDigest.digest(data.getBytes());
 		Utils.printByteArray("Digest", digest);
-
 	}
 
 
