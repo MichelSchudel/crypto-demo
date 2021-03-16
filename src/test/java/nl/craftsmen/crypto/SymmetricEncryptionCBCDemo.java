@@ -38,7 +38,7 @@ public class SymmetricEncryptionCBCDemo {
         Utils.printByteArray("ivSpec", random);
 
         //input
-        byte[] input = "NlJug!!!".repeat(16).getBytes();
+        byte[] input = "JavaLand".repeat(16).getBytes();
         Utils.printText("input", input);
 
         //encryption

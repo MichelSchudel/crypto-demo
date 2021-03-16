@@ -20,7 +20,7 @@ public class SimpleSigningDemo {
         Utils.printByteArray("private key", keyPair.getPrivate().getEncoded());
         Utils.printByteArray("public key", keyPair.getPublic().getEncoded());
 
-        String data = "NlJug is the best!!!";
+        String data = "JavaLand is the best!!!";
 
         Signature signatureAlgorithm = Signature.getInstance("SHA256WithRSA");
         signatureAlgorithm.initSign(keyPair.getPrivate());
@@ -33,7 +33,7 @@ public class SimpleSigningDemo {
 
 
         //verification on the other end
-        String receivedData = "NlJug is the worst!!!";
+        String receivedData = "JavaLand is the worst!!!";
 
         Signature verificationAlgorithm = Signature.getInstance("SHA256WithRSA");
         verificationAlgorithm.initVerify(keyPair.getPublic());
